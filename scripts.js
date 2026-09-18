@@ -37,8 +37,21 @@ async function lerFoto() {
     // Pegar a resposta da IA e filtrar para mostrar na tela
     let texto = resposta.message.content
 
-    // Colocar na tela
-    document.querySelector(".lista").innerHTML = texto;
+    let partes = texto.split("|")
+    console.log(partes)
 
-    console.log(texto)
+    // Colocar na tela
+    document.querySelector(".lista").innerHTML += `
+        <div class="comprovante">
+
+            <div class="itens">${partes[0]}</div>
+
+            <div class="total-nota">Total da nota: R$ ${partes[1]}</div>
+
+        </div>
+    `
+
+    total += Number(partes[1])
+    document.querySelector(".total-gasto").innerHTML = "R$" + total.toFixed(2)
+        
 }
